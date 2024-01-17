@@ -29,5 +29,5 @@ jobs:
      
     - name: Build Backend Folder
       run: |
-        cd BackendFolder
+        cd D:\a\webapi2\webapi2\BackendFolder
         dotnet build --configuration Release
