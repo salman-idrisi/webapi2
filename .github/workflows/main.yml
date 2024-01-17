@@ -24,10 +24,9 @@ jobs:
       with:
         dotnet-version: '3.1.x'
         
-    - name: Create Backend Folder
-      run: mkdir BackendFolder
-     
-    - name: Build Backend Folder
-      run: |
-        cd D:\a\webapi2\webapi2\BackendFolder
-        dotnet build --configuration Release
+    - name: Change project directoy
+      run: src
+
+    - name: Build Backend
+      run: dotnet build --configuration Release 
+    
