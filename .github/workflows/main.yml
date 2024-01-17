@@ -23,8 +23,11 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: '3.1.x'
-
-    - name: Build Backend
+        
+    - name: Create Backend Folder
+      run: mkdir BackendFolder
+     
+    - name: Build Backend Folder
       run: |
         cd BackendFolder
         dotnet build --configuration Release
