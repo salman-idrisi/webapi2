@@ -24,6 +24,11 @@ jobs:
       with:
         dotnet-version: '3.1.x'
 
+    - name: Change project directory
+      run: |
+        cd WebAPI
+        ls  # List contents to verify you are in the right directory
+        
     - name: Build Backend
       run: dotnet build --configuration Release
     
