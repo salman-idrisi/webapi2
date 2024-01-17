@@ -1,0 +1,63 @@
+version: '3.8'
+
+networks:
+  masterslave:
+
+volumes:
+  mssqldata:
+
+services:
+
+  dotnetapp:
+    container_name: webapi-container
+    image: webapi
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 50306:80
+    networks:
+      - masterslave
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:50306/"]
+      interval: 10s
+      timeout: 15s
+      retries: 5
+    restart: on-failure
+
+    cpu_shares: 2048
+    deploy:
+      resources:
+        limits:
+          memory: 2GB
+        reservations:
+          memory: 2GB
+
+  angularapp:
+    container_name: angularcrud-container
+    image: angularcrud
+    build:
+      context: ./
+      dockerfile: angularcrud-main/Dockerfile
+    ports:
+      - 4200:4200
+    depends_on:
+      - dotnetapp
+    networks:
+      - masterslave
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4200/"]
+      interval: 10s
+      timeout: 15s
+      retries: 5
+    restart: on-failure
+
+    cpu_shares: 2048
+    deploy:
+      resources:
+        limits:
+          memory: 2GB
+        reservations:
+          memory: 1GB
