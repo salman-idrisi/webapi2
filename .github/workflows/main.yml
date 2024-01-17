@@ -26,9 +26,9 @@ jobs:
 
     - name: Change project directory
       run: |
-        cd WebAPI
+        cd WebAPI/WebAPI.sln
         ls  # List contents to verify you are in the right directory
         
     - name: Build Backend
-      run: dotnet build --configuration Release
+      run: dotnet build --configuration Release WebAPI.sln
     
