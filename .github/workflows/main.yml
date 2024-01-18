@@ -20,4 +20,7 @@ jobs:
 
     - name: Build Backend
       run: dotnet build --configuration Release ./WebAPI/WebAPI.sln
+
+    - name: dotnet publish
+      run: dotnet publish -c Release -o ${{ env.DOTNET_ROOT }}/myapp
     
