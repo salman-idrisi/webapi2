@@ -34,4 +34,8 @@ jobs:
           cd angularcrud-main
           npm install
 
-
+    - name: Build and Test Angular Frontend
+      run: |
+          cd AngularCRUD
+          npm run build
+          npm test
