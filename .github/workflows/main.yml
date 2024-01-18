@@ -14,7 +14,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Setup .Net
-      uses: actions/setup-dotnet@v2
+      uses: actions/setup-dotnet@v3
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
@@ -23,4 +23,15 @@ jobs:
 
     - name: dotnet publish
       run: dotnet publish -c Release ./WebAPI/WebAPI.sln
-    
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+          
+    - name: Install Dependencies
+      run: |
+          cd angularcrud-main
+          ls
+
+
