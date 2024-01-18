@@ -32,6 +32,6 @@ jobs:
     - name: Install Dependencies
       run: |
           cd angularcrud-main
-          ls
+          npm install
 
 
