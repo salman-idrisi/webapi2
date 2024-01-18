@@ -17,11 +17,12 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '18'
+
+    - name: Navigate to Angular project directory
+      run: cd angularcrud-main
           
     - name: Install Dependencies
-      run: |
-          cd angularcrud-main
-          npm install
+      run: npm install
 
     - name: Build
       run: npm run build
