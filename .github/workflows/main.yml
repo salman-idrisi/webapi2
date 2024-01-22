@@ -20,10 +20,10 @@ jobs:
 
     - name: Build .NET Backend
       run: |
-        cd WEBAPIUPDATED\WebAPI
+        cd WebAPI\WebAPI
         dotnet publish -c Release -o published
         ls  # List contents to verify you are in the right directory
-        echo "::set-output name=backend_path::WEBAPIUPDATED\WebAPI\published"
+        echo "::set-output name=backend_path::WebAPI\WebAPI\published"
 
     - name: Setup Node.js
       uses: actions/setup-node@v3
@@ -44,7 +44,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: backend-artifact
-        path: WEBAPIUPDATED\WebAPI\published
+        path: WebAPI\WebAPI\published
 
     - name: Upload Frontend Artifact
       uses: actions/upload-artifact@v4
@@ -65,7 +65,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: backend-artifact
-          path: WEBAPIUPDATED\WebAPI\published
+          path: WebAPI\WebAPI\published
 
       - name: Download Frontend Artifact
         uses: actions/download-artifact@v4
@@ -76,7 +76,7 @@ jobs:
       - name: Copy file to IIS
         run: |
           #copy .net 
-          cp -r WEBAPIUPDATED\WebAPI\published\* "D:\AngularWEBapi"
+          cp -r WebAPI\WebAPI\published\* "D:\AngularWEBapi"
 
       - name: Copy Agular Frontend to IIS
         run: |
