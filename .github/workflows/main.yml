@@ -18,11 +18,12 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
-    - name: Build Backend
-      run: dotnet build --configuration Release ./WebAPI/WebAPI.sln
-
-    - name: dotnet publish
-      run: dotnet publish -c Release ./WebAPI/WebAPI.sln
+    - name: Build .NET Backend
+      run: |
+        cd WEBAPIUPDATED\WebAPI
+        dotnet publish -c Release -o published
+        ls  # List contents to verify you are in the right directory
+        echo "::set-output name=backend_path::WEBAPIUPDATED\WebAPI\published"
 
     - name: Setup Node.js
       uses: actions/setup-node@v3
