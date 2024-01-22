@@ -76,7 +76,7 @@ jobs:
       - name: Copy file to IIS
         run: |
           #copy .net 
-          cp -r WebAPI\WebAPI\published\* "D:\AngularWebAPI
+          cp -r WebAPI\WebAPI\published\* "D:\AngularWebAPI"
 
       - name: Copy Agular Frontend to IIS
         run: |
