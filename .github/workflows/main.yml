@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: self-hosted
 
     steps:
     - name: checkout code
@@ -55,7 +55,7 @@ jobs:
           
   deploy:
     needs: build
-    runs-on: windows-latest
+    runs-on: self-hosted
   
     steps:
       - name: Checkout Repository
@@ -76,8 +76,8 @@ jobs:
       - name: Copy dotnet to IIS
         run: |
           #copy .net 
-          Copy-Item -Path WebAPI\WebAPI\published\* -Destination "D:\DevOps-Projects\IIS_Deploy\WebAPI" -Recurse
+          cp -r WebAPI\WebAPI\published\* "D:\DevOps-Projects\IIS_Deploy\WebAPI"
 
       - name: Copy Angular Frontend to IIS
         run: |
-          Copy-Item -Path angularcrud-main\dist\* -Destination "D:\DevOps-Projects\IIS_Deploy\angularcrud-main" -Recurse
+          cp -r angularcrud-main\dist\* "D:\DevOps-Projects\IIS_Deploy\angularcrud-main"
