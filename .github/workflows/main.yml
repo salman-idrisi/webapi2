@@ -10,47 +10,47 @@ jobs:
     runs-on: self-hosted
 
     steps:
-    - name: checkout code
-      uses: actions/checkout@v3
+      - name: checkout code
+        uses: actions/checkout@v3
 
-    - name: Setup .Net
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: Setup .Net
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
 
-    - name: Build .NET Backend
-      run: |
-        cd WebAPI\WebAPI
-        dotnet publish -c Release -o published
-        ls  # List contents to verify you are in the right directory
-        echo "::set-output name=backend_path::WebAPI\WebAPI\published"
+      - name: Build .NET Backend
+        run: |
+          cd WebAPI\WebAPI
+          dotnet publish -c Release -o published
+          ls  # List contents to verify you are in the right directory
+          echo "::set-output name=backend_path::WebAPI\WebAPI\published"
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
           
-    - name: Install Dependencies
-      run: |
+      - name: Install Dependencies
+        run: |
           cd angularcrud-main
           npm install
 
-    - name: Build and Test Angular Frontend
-      run: |
+      - name: Build and Test Angular Frontend
+        run: |
           cd angularcrud-main
           npm run build
           
-    - name: Upload Backend Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: backend-artifact
-        path: WebAPI\WebAPI\published
+      - name: Upload Backend Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: backend-artifact
+          path: WebAPI\WebAPI\published
 
-    - name: Upload Frontend Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: frontend-artifact
-        path: angularcrud-main/dist
+      - name: Upload Frontend Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-artifact
+          path: angularcrud-main/dist
 
           
   deploy:
