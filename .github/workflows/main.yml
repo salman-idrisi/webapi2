@@ -51,8 +51,8 @@ jobs:
       - name: Copy dotnet to IIS
         run: |
           #copy .net 
-          cp -r WebAPI\WebAPI\* "D:\DevOps-Projects\IIS_Deploy\WebAPI"
+          cp -r WebAPI\* "C:\www\angularcrud_webapi.com\webapi"
 
       - name: Copy Angular Frontend to IIS
         run: |
-          cp -r angularcrud-main\* "D:\DevOps-Projects\IIS_Deploy\angularcrud-main"
+          cp -r angularcrud-main\* "C:\www\angularcrud_webapi.com\angularcrud"
