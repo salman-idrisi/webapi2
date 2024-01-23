@@ -80,4 +80,4 @@ jobs:
 
       - name: Copy Angular Frontend to IIS
         run: |
-          cp -r angularcrud-main/dist/* "D:\DevOps-Projects\IIS_Deploy\angularcrud-main"
+          cp -r angularcrud-main\dist\* "D:\DevOps-Projects\IIS_Deploy\angularcrud-main"
