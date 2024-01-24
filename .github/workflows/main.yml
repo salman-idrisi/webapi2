@@ -19,11 +19,13 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Build with .NET
+        shell: cmd
         run: |
           cd WebAPI
           dotnet build --configuration Release
       
       - name: Publish .NET
+        shell: cmd
         run: |
           dotnet publish -c Release -o .\myapp
           
