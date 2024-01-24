@@ -27,5 +27,12 @@ jobs:
         shell: cmd
         run: |
           dotnet publish -c Release -o .\myapp ./WebAPI/WebAPI.sln
+
+      - name: Deploy to IIS
+        shell: cmd
+        run: |
+          iisreset /stop
+          xcopy /s /y .\myapp\* C:\www\angularcrud_webapi.com
+          iisreset /start
           
                 
