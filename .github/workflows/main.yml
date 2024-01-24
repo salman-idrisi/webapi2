@@ -6,53 +6,23 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: self-hosted
 
     steps:
       - name: checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Setup .Net
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Build .NET Backend
+      - name: Build with .NET
+        run: dotnet build --configuration Release
+      
+      - name: Publish .NET
         run: |
-          cd WebAPI\WebAPI
-          dotnet publish -c Release -o published
-          ls  # List contents to verify you are in the right directory
-          echo "::set-output name=backend_path::WebAPI\WebAPI\published"
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+          dotnet publish -c Release -o .\myapp
           
-      - name: Install Dependencies
-        run: |
-          cd angularcrud-main
-          npm install
-
-      - name: Build and Test Angular Frontend
-        run: |
-          cd angularcrud-main
-          npm run build
-          
-  deploy:
-    needs: build
-    runs-on: self-hosted
-  
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-
-      - name: Copy dotnet to IIS
-        run: |
-          #copy .net 
-          cp -r WebAPI\* "C:\www\angularcrud_webapi.com\webapi"
-
-      - name: Copy Angular Frontend to IIS
-        run: |
-          cp -r angularcrud-main\* "C:\www\angularcrud_webapi.com\angularcrud"
+                
