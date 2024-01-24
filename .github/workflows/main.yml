@@ -26,6 +26,8 @@ jobs:
       - name: Publish .NET
         shell: cmd
         run: |
+          cd WebAPI
+          ls
           dotnet publish -c Release -o .\myapp
           
                 
