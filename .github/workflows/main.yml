@@ -19,7 +19,9 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Build with .NET
-        run: dotnet build --configuration Release
+        run: |
+          cd WebAPI
+          dotnet build --configuration Release
       
       - name: Publish .NET
         run: |
