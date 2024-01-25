@@ -11,28 +11,25 @@ jobs:
 
     steps:
       - name: checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup .Net
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Build with .NET
-        shell: cmd
         run: |
-          dotnet build --configuration Release ./WebAPI/WebAPI.sln
+          cd WebAPI
+          dotnet build --configuration Release
       
       - name: Publish .NET
-        shell: cmd
         run: |
-          dotnet publish -c Release -o .\myapp ./WebAPI/WebAPI.sln
+          cd WebAPI
+          dotnet publish -c Release -o published
 
-      - name: Deploy to IIS
-        shell: cmd
+      - name: Copy dotnet to IIS
         run: |
-          iisreset /stop
-          xcopy /s /y .\myapp\* C:\www\angularcrud_webapi.com
-          iisreset /start
+          Copy-Item -Path "$env:GITHUB_WORKSPACE\*" -Destination "C:\www\webapi_app" -Recurse -Force
           
                 
