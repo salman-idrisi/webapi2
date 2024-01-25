@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  build_and_deploy:
     runs-on: self-hosted
 
     steps:
@@ -43,18 +43,11 @@ jobs:
           cd angularcrud-main
           npm run build 
 
-  deploy:
-    runs-on: self-hosted
-
-    steps:
-      - name: checkout code
-        uses: actions/checkout@v3
-  
-      - name: Copy dotnet to IIS
+      - name: Deploy dotnet to IIS
         run: |
           Copy-Item -Path "$env:GITHUB_WORKSPACE\WebAPI\WebAPI\published\*" -Destination "C:\www\angularcrud_webapi\webapi" -Recurse -Force
           
-      - name: Copy angular to IIS
+      - name: Deploy angular to IIS
         run: |
           Copy-Item -Path "$env:GITHUB_WORKSPACE\angularcrud-main\dist\*" -Destination "C:\www\angularcrud_webapi\angularcrud" -Recurse -Force
                 
