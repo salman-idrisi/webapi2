@@ -20,13 +20,12 @@ jobs:
 
       - name: Build with .NET
         run: |
-          cd WebAPI
-          ls
+          cd WebAPI\WebAPI
           dotnet build --configuration Release
       
       - name: Publish .NET
         run: |
-          cd WebAPI
+          cd WebAPI\WebAPI
           dotnet publish -c Release -o published
 
       - name: Setup Node.js
