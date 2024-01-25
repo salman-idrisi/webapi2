@@ -49,5 +49,5 @@ jobs:
           
       - name: Deploy angular to IIS
         run: |
-          Copy-Item -Path "$env:GITHUB_WORKSPACE\*" -Destination "C:\www\angularcrud_webapi\angularcrud" -Recurse -Force
+          Copy-Item -Path "$env:GITHUB_WORKSPACE\angularcrud-main\*" -Destination "C:\www\angularcrud_webapi\angularcrud" -Recurse -Force
                 
