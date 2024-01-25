@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: self-hosted
 
     steps:
@@ -28,8 +28,33 @@ jobs:
           cd WebAPI
           dotnet publish -c Release -o published
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
+      - name: Install Dependencies
+        run: |
+          cd angularcrud-main
+          npm install
+
+      - name: Build Angular Frontend
+        run: |
+          cd angularcrud-main
+          npm run build 
+
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v3
+  
       - name: Copy dotnet to IIS
         run: |
-          Copy-Item -Path "$env:GITHUB_WORKSPACE\*" -Destination "C:\www\angularcrud_webapi\webapi" -Recurse -Force
+          Copy-Item -Path "$env:GITHUB_WORKSPACE\WebAPI\WebAPI\published\*" -Destination "C:\www\angularcrud_webapi\webapi" -Recurse -Force
           
+      - name: Copy angular to IIS
+        run: |
+          Copy-Item -Path "$env:GITHUB_WORKSPACE\angularcrud-main\dist\*" -Destination "C:\www\angularcrud_webapi\angularcrud" -Recurse -Force
                 
